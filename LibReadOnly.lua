@@ -70,4 +70,4 @@ function makeReadOnly(lib,t)
 	return proxy;
 end
 
-LibReadOnly.new = makeReadOnly;
+LibReadOnly.New = makeReadOnly;
