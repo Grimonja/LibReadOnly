@@ -52,7 +52,12 @@ function makeReadOnly(lib,t)
 				return function() return true; end
 			end
 
-			return t[k];
+			local requestedValue = t[k];
+			if(type(requestedValue) == "table")then
+				return makeReadOnly(lib,requestedValue);
+			else
+				return requestedValue;
+			end
 		end,
 		__newindex = function(self, k, v)
 			error("attempt to update " .. k .. " of read-only table.");
