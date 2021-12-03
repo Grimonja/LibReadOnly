@@ -40,7 +40,7 @@ local function safeIPairs(t)
 	return iter;
 end
 
-function makeReadOnly(lib,t)
+function makeReadOnly(lib,t,nonRecursive)
 	local proxy = {};
 	setmetatable(proxy, {
 		__index = function(self, k)
@@ -53,7 +53,7 @@ function makeReadOnly(lib,t)
 			end
 
 			local requestedValue = t[k];
-			if(type(requestedValue) == "table")then
+			if(not nonRecursive and type(requestedValue) == "table")then
 				return makeReadOnly(lib,requestedValue);
 			else
 				return requestedValue;
