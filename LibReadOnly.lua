@@ -1,15 +1,8 @@
-local addOnName,addon = ...;
-
 local MAJOR = "LibReadOnly";
 local MINOR = "1.0.0";
-local LibReadOnly;
 
-local lib, minor = LibStub:GetLibrary(MAJOR, true);
-if lib and minor and minor >= MINOR then
-	return lib;
-else
-	LibReadOnly = LibStub:NewLibrary(MAJOR, MINOR);
-end
+local LibReadOnly = LibStub:NewLibrary(MAJOR, MINOR);
+if not LibReadOnly then return; end
 
 local makeReadOnly;
 
