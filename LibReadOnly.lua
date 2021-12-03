@@ -63,7 +63,7 @@ function makeReadOnly(lib,t,nonRecursive)
 			error("attempt to update " .. k .. " of read-only table.");
 		end,
 		__metatable = false,
-	})
+	});
 
 	return proxy;
 end
