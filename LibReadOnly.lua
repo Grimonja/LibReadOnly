@@ -44,11 +44,11 @@ function makeReadOnly(lib,t,nonRecursive)
 	local proxy = {};
 	setmetatable(proxy, {
 		__index = function(self, k)
-			if k == "pairs" then
+			if(k == "pairs")then
 				return function() return safePairs(t); end
-			elseif k == "ipairs" then
+			elseif(k == "ipairs")then
 				return function() return safeIPairs(t); end
-			elseif k == "IsReadOnly" then
+			elseif(k == "IsReadOnly")then
 				return function() return true; end
 			end
 
@@ -60,7 +60,7 @@ function makeReadOnly(lib,t,nonRecursive)
 			end
 		end,
 		__newindex = function(self, k, v)
-			error("attempt to update " .. k .. " of read-only table.");
+			error("attempt to update " .. k .. " of read-only table.",2);
 		end,
 		__metatable = false,
 	});
