@@ -1,5 +1,5 @@
 local MAJOR = "LibReadOnly";
-local MINOR = "1.0.0";
+local MINOR = 2;
 
 local LibReadOnly = LibStub:NewLibrary(MAJOR, MINOR);
 if not LibReadOnly then return; end
@@ -48,8 +48,8 @@ function makeReadOnly(lib,t,nonRecursive)
 				return function() return safePairs(t); end
 			elseif(k == "ipairs")then
 				return function() return safeIPairs(t); end
-			elseif(k == "IsReadOnly")then
-				return function() return true; end
+			elseif(k == "isReadOnly")then
+				return true;
 			end
 
 			local requestedValue = t[k];
@@ -60,7 +60,7 @@ function makeReadOnly(lib,t,nonRecursive)
 			end
 		end,
 		__newindex = function(self, k, v)
-			error("attempt to update " .. k .. " of read-only table.",2);
+			error("attempt to update " .. k .. " of read-only table.", 2);
 		end,
 		__metatable = false,
 	});
