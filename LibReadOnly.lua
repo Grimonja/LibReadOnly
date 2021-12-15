@@ -1,5 +1,5 @@
 local MAJOR = "LibReadOnly";
-local MINOR = 2;
+local MINOR = 3;
 
 local LibReadOnly = LibStub:NewLibrary(MAJOR, MINOR);
 if not LibReadOnly then return; end
