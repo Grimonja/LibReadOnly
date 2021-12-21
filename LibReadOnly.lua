@@ -1,5 +1,5 @@
 local MAJOR = "LibReadOnly";
-local MINOR = 4;
+local MINOR = 5;
 
 local LibReadOnly = LibStub:NewLibrary(MAJOR, MINOR);
 if not LibReadOnly then return; end
@@ -44,6 +44,7 @@ local function safeIPairs(lib,t,nonRecursive)
 end
 
 function makeReadOnly(lib,t,nonRecursive)
+	if(lib ~= LibReadOnly) then error("LibReadOnly calls need to be `self` call. `LibReadOnly:New(table)` instead of `LibReadOnly.New(table)`.",2); end
 	local proxy = {};
 	setmetatable(proxy, {
 		__index = function(self, k)
@@ -71,7 +72,8 @@ function makeReadOnly(lib,t,nonRecursive)
 	return proxy;
 end
 
-local function protectArguments(...)
+local function protectArguments(lib,...)
+	if(lib ~= LibReadOnly) then error("LibReadOnly calls need to be `self` call. `LibReadOnly:ProtectArguments(table)` instead of `LibReadOnly.ProtectArguments(table)`.",2); end
 	local argsCount = select("#",...);
 	local args = {...};
 
